@@ -18,15 +18,20 @@ public class CollectionTestSuite {
     }
     @Test
     public void testOddNumbersExterminatorEmptyList() {
+        //Given
         OddNumbersExterminator oddNumExt = new OddNumbersExterminator();
+        //When
         ArrayList<Integer> numbers = new ArrayList<>();
         System.out.println("Testing method on empty list");
         ArrayList<Integer> result = new ArrayList<>();
+        //Then
         Assert.assertEquals(oddNumExt.exterminate(numbers), result);
     }
     @Test
     public void testOddNumbersExterminatorNormalList() {
+        //Given
         OddNumbersExterminator oddNumExt = new OddNumbersExterminator();
+        //When
         ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             numbers.add(i);
@@ -38,6 +43,7 @@ public class CollectionTestSuite {
         result.add(4);
         result.add(6);
         result.add(8);
+        //Then
         Assert.assertEquals(oddNumExt.exterminate(numbers), result);
     }
 }
