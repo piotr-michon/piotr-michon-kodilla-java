@@ -154,4 +154,16 @@ public class StatisticsCalculatorTestSuite {
         Assert.assertEquals(100, staCal.getAvgNoOfCommentsPerUser(), 0);
         Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerPost(),0);
     }
+
+    @Test
+    public void testCalculateAdvStatisticsWhenUsersNamesEqualsNull() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        when(statisticsMock.usersNames()).thenReturn(null);
+        StatisticsCalculator staCal = new StatisticsCalculator();
+        //When
+        staCal.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(0, staCal.getTotalNoOfUsers());
+    }
 }

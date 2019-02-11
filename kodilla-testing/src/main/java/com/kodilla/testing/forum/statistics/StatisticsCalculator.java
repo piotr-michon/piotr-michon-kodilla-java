@@ -8,6 +8,10 @@ public class StatisticsCalculator {
     private double avgNoOfCommentsPerUser;
     private double avgNoOfCommentsPerPost;
 
+    public int getTotalNoOfUsers() {
+        return totalNoOfUsers;
+    }
+
     public double getAvgNoOfPostsPerUser() {
         return avgNoOfPostsPerUser;
     }
@@ -24,7 +28,9 @@ public class StatisticsCalculator {
         totalNoOfPosts = statistics.postsCount();
         totalNoOfComments = statistics.commentsCount();
 
-        if (statistics.usersNames().size() > 0 && statistics.usersNames() != null) {
+        if (statistics.usersNames() == null ) {
+            totalNoOfUsers = 0;
+        } else if (statistics.usersNames().size() > 0) {
             totalNoOfUsers = statistics.usersNames().size();
         } else {
             totalNoOfUsers = 0;
