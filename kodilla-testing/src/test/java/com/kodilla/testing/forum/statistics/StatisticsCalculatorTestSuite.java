@@ -15,25 +15,32 @@ public class StatisticsCalculatorTestSuite {
     public static void beforeAllTests() {
         System.out.println("This is the beginning of tests.");
     }
+
     @AfterClass
     public static void afterAllTests() {
         System.out.println("All tests are finished.");
     }
     @Before
+
     public void beforeEveryTest() {
         testCounter++;
         System.out.println("Preparing to execute test #" + testCounter);
     }
+
+    private static List<String> tenUsersListCreator() {
+        List<String> tenUsersList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            tenUsersList.add("User " + i);
+        }
+        return tenUsersList;
+    }
+
     @Test
-    public void testCalculateAdvStatistics() {
-        //Case: totalNoOfPosts = 0
+    public void testCalculateAdvStatisticsWhenTotalNoOfPostsEqualsZero() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            usersList.add("User " + i);
-        }
-        when(statisticsMock.usersNames()).thenReturn(usersList);
+
+        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
         int totalNoOfPosts = 0;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 100;
@@ -43,20 +50,17 @@ public class StatisticsCalculatorTestSuite {
         //When
         staCal.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(0, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(10, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(0, staCal.avgNoOfCommentsPerPost,0);
+        Assert.assertEquals(0, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(0, staCal.getAvgNoOfCommentsPerPost(),0);
     }
+
     @Test
-    public void testCalculateAdvStatistics1() {
-        //Case: totalNoOfPosts = 1000 && Case: totalNoOfComments < totalNoOfPosts
+    public void testCalculateAdvStatisticsWhenTotalNoOfPostsEqualsOneThousandAndIsMoreThanTotalNoOfComments() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            usersList.add("User " + i);
-        }
-        when(statisticsMock.usersNames()).thenReturn(usersList);
+
+        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 100;
@@ -66,20 +70,17 @@ public class StatisticsCalculatorTestSuite {
         //When
         staCal.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(100, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(10, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(0, staCal.avgNoOfCommentsPerPost,0);
+        Assert.assertEquals(100, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(0, staCal.getAvgNoOfCommentsPerPost(),0);
     }
+
     @Test
-    public void testCalculateAdvStatistics2() {
-        //Case: totalNoOfComments = 0
+    public void testCalculateAdvStatisticsWhenTotalNoOfCommentsEqualsZero() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            usersList.add("User " + i);
-        }
-        when(statisticsMock.usersNames()).thenReturn(usersList);
+
+        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 0;
@@ -89,20 +90,60 @@ public class StatisticsCalculatorTestSuite {
         //When
         staCal.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(100, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(0, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(0, staCal.avgNoOfCommentsPerPost,0);
+        Assert.assertEquals(100, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(0, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(0, staCal.getAvgNoOfCommentsPerPost(),0);
     }
+
     @Test
-    public void testCalculateAdvStatistics3() {
-        //Case: totalNoOfComments > totalNoOfPosts
+    public void testCalculateAdvStatisticsWhenTotalNoOfCommentsIsMoreThanTotalNoOfPosts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            usersList.add("User " + i);
+
+        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
+        int totalNoOfPosts = 1000;
+        when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
+        int totalNoOfComments = 10000;
+        when(statisticsMock.commentsCount()).thenReturn(totalNoOfComments);
+
+        StatisticsCalculator staCal = new StatisticsCalculator();
+        //When
+        staCal.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(100, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(1000, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerPost(),0);
+    }
+
+    @Test
+    public void testCalculateAdvStatisticsWhenTotalNoOfUsersEqualsZero() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> emptyUsersList = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(emptyUsersList);
+        int totalNoOfPosts = 1000;
+        when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
+        int totalNoOfComments = 10000;
+        when(statisticsMock.commentsCount()).thenReturn(totalNoOfComments);
+
+        StatisticsCalculator staCal = new StatisticsCalculator();
+        //When
+        staCal.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(0, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(0, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerPost(),0);
+    }
+
+    @Test
+    public void testCalculateAdvStatisticsWhenTotalNoOfUsersEqualsOneHundred() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> oneHundredUsersList = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            oneHundredUsersList.add("User " + i);
         }
-        when(statisticsMock.usersNames()).thenReturn(usersList);
+        when(statisticsMock.usersNames()).thenReturn(oneHundredUsersList);
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 10000;
@@ -112,51 +153,8 @@ public class StatisticsCalculatorTestSuite {
         //When
         staCal.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(100, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(1000, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(10, staCal.avgNoOfCommentsPerPost,0);
-    }
-    @Test
-    public void testCalculateAdvStatistics4() {
-        //Case: totalNoOfUsers = 0
-        //Given
-        Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        when(statisticsMock.usersNames()).thenReturn(usersList);
-        int totalNoOfPosts = 1000;
-        when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
-        int totalNoOfComments = 10000;
-        when(statisticsMock.commentsCount()).thenReturn(totalNoOfComments);
-
-        StatisticsCalculator staCal = new StatisticsCalculator();
-        //When
-        staCal.calculateAdvStatistics(statisticsMock);
-        //Then
-        Assert.assertEquals(0, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(0, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(10, staCal.avgNoOfCommentsPerPost,0);
-    }
-    @Test
-    public void testCalculateAdvStatistics5() {
-        //Case: totalNoOfUsers = 100
-        //Given
-        Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersList = new ArrayList<>();
-        for(int i = 0; i < 100; i++) {
-            usersList.add("User " + i);
-        }
-        when(statisticsMock.usersNames()).thenReturn(usersList);
-        int totalNoOfPosts = 1000;
-        when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
-        int totalNoOfComments = 10000;
-        when(statisticsMock.commentsCount()).thenReturn(totalNoOfComments);
-
-        StatisticsCalculator staCal = new StatisticsCalculator();
-        //When
-        staCal.calculateAdvStatistics(statisticsMock);
-        //Then
-        Assert.assertEquals(10, staCal.avgNoOfPostsPerUser, 0);
-        Assert.assertEquals(100, staCal.avgNoOfCommentsPerUser, 0);
-        Assert.assertEquals(10, staCal.avgNoOfCommentsPerPost,0);
+        Assert.assertEquals(10, staCal.getAvgNoOfPostsPerUser(), 0);
+        Assert.assertEquals(100, staCal.getAvgNoOfCommentsPerUser(), 0);
+        Assert.assertEquals(10, staCal.getAvgNoOfCommentsPerPost(),0);
     }
 }

@@ -1,31 +1,48 @@
 package com.kodilla.testing.forum.statistics;
 
 public class StatisticsCalculator {
-    int totalNoOfUsers;
-    int totalNoOfPosts;
-    int totalNoOfComments;
-    double avgNoOfPostsPerUser;
-    double avgNoOfCommentsPerUser;
-    double avgNoOfCommentsPerPost;
+    private int totalNoOfUsers;
+    private int totalNoOfPosts;
+    private int totalNoOfComments;
+    private double avgNoOfPostsPerUser;
+    private double avgNoOfCommentsPerUser;
+    private double avgNoOfCommentsPerPost;
+
+    public double getAvgNoOfPostsPerUser() {
+        return avgNoOfPostsPerUser;
+    }
+
+    public double getAvgNoOfCommentsPerUser() {
+        return avgNoOfCommentsPerUser;
+    }
+
+    public double getAvgNoOfCommentsPerPost() {
+        return avgNoOfCommentsPerPost;
+    }
 
     public void calculateAdvStatistics(Statistics statistics) {
-        totalNoOfUsers = statistics.usersNames().size();
         totalNoOfPosts = statistics.postsCount();
         totalNoOfComments = statistics.commentsCount();
 
-        if(totalNoOfUsers > 0) {
+        if (statistics.usersNames().size() > 0) {
+            totalNoOfUsers = statistics.usersNames().size();
+        } else {
+            totalNoOfUsers = 0;
+        }
+        if (totalNoOfUsers > 0) {
             avgNoOfPostsPerUser = totalNoOfPosts / totalNoOfUsers;
             avgNoOfCommentsPerUser = totalNoOfComments / totalNoOfUsers;
         } else {
             avgNoOfPostsPerUser = 0;
             avgNoOfCommentsPerUser = 0;
         }
-        if(totalNoOfPosts > 0) {
+        if (totalNoOfPosts > 0) {
             avgNoOfCommentsPerPost = totalNoOfComments / totalNoOfPosts;
         } else {
             avgNoOfCommentsPerPost = 0;
         }
     }
+
     public void showStatistics() {
         System.out.println("Total number of users: " + totalNoOfUsers);
         System.out.println("Total number of posts: " + totalNoOfPosts);
