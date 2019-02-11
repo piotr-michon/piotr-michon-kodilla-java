@@ -27,9 +27,9 @@ public class StatisticsCalculatorTestSuite {
         System.out.println("Preparing to execute test #" + testCounter);
     }
 
-    private static List<String> tenUsersListCreator() {
+    private static List<String> usersListCreator(int usersQuantity) {
         List<String> tenUsersList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i <= usersQuantity; i++) {
             tenUsersList.add("User " + i);
         }
         return tenUsersList;
@@ -40,7 +40,7 @@ public class StatisticsCalculatorTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
+        when(statisticsMock.usersNames()).thenReturn(usersListCreator(10));
         int totalNoOfPosts = 0;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 100;
@@ -60,7 +60,7 @@ public class StatisticsCalculatorTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
+        when(statisticsMock.usersNames()).thenReturn(usersListCreator(10));
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 100;
@@ -80,7 +80,7 @@ public class StatisticsCalculatorTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
+        when(statisticsMock.usersNames()).thenReturn(usersListCreator(10));
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 0;
@@ -100,7 +100,7 @@ public class StatisticsCalculatorTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        when(statisticsMock.usersNames()).thenReturn(tenUsersListCreator());
+        when(statisticsMock.usersNames()).thenReturn(usersListCreator(10));
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 10000;
@@ -139,11 +139,8 @@ public class StatisticsCalculatorTestSuite {
     public void testCalculateAdvStatisticsWhenTotalNoOfUsersEqualsOneHundred() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> oneHundredUsersList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            oneHundredUsersList.add("User " + i);
-        }
-        when(statisticsMock.usersNames()).thenReturn(oneHundredUsersList);
+
+        when(statisticsMock.usersNames()).thenReturn(usersListCreator(100));
         int totalNoOfPosts = 1000;
         when(statisticsMock.postsCount()).thenReturn(totalNoOfPosts);
         int totalNoOfComments = 10000;

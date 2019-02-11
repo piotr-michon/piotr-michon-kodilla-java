@@ -24,7 +24,7 @@ public class StatisticsCalculator {
         totalNoOfPosts = statistics.postsCount();
         totalNoOfComments = statistics.commentsCount();
 
-        if (statistics.usersNames().size() > 0) {
+        if (statistics.usersNames().size() > 0 && statistics.usersNames() != null) {
             totalNoOfUsers = statistics.usersNames().size();
         } else {
             totalNoOfUsers = 0;
