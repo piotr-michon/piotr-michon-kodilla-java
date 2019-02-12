@@ -8,21 +8,21 @@ import com.kodilla.stream.reference.FunctionalCalculator;
 
 public class StreamMain {
     public static void main(String[] args) {
-        System.out.println("Welcome to module 7 - Stream");
+        System.out.println("Welcome to module 7 - Stream\n");
 
         Processor processor = new Processor();
-        Executor codeToExecute = () -> System.out.println("This is an example text.");
+        Executor codeToExecute = () -> System.out.println("This is an example text.\n");
         processor.execute(codeToExecute);
 
         ExpressionExecutor expressionExecutor = new ExpressionExecutor();
 
-        System.out.println("Calculating expressions with lambdas");
+        System.out.println("\nCalculating expressions with lambdas");
         expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
         expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
         expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
         expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
 
-        System.out.println("Calculating expressions with method references");
+        System.out.println("\nCalculating expressions with method references");
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::multiplyAByB);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::addAToB);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
@@ -30,7 +30,10 @@ public class StreamMain {
 
         PoemBeautifier poemBeautifier = new PoemBeautifier();
 
-        System.out.println("Poem Beautifier example 1");
-
+        System.out.println("\nPoem Beautifier Examples");
+        poemBeautifier.beautify("FirstText", poem -> "ABC" + poem + "ABC");
+        poemBeautifier.beautify("SecondText", poem -> poem.toUpperCase());
+        poemBeautifier.beautify("ThirdText", poem -> new StringBuilder(poem).reverse().toString());
+        poemBeautifier.beautify("FourthText", poem -> poem.replace("", " ").trim());
     }
 }
