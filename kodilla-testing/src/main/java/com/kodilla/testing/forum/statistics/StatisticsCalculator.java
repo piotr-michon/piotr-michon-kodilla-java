@@ -30,10 +30,8 @@ public class StatisticsCalculator {
 
         if (statistics.usersNames() == null ) {
             totalNoOfUsers = 0;
-        } else if (statistics.usersNames().size() > 0) {
-            totalNoOfUsers = statistics.usersNames().size();
         } else {
-            totalNoOfUsers = 0;
+            totalNoOfUsers = statistics.usersNames().size();
         }
         if (totalNoOfUsers > 0) {
             avgNoOfPostsPerUser = totalNoOfPosts / totalNoOfUsers;

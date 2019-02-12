@@ -91,25 +91,27 @@ public class BookDirectoryTestSuite {
         // Given
         LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
-        LibraryUser libraryUser = new LibraryUser("First", "Last", "Pesel");
+        LibraryUser libraryUser0 = new LibraryUser("First0", "Last0", "Pesel0");
+        LibraryUser libraryUser1 = new LibraryUser("First1", "Last1", "Pesel1");
+        LibraryUser libraryUser2 = new LibraryUser("First2", "Last2", "Pesel2");
         List<Book> resultListOf0Books = new ArrayList<>();
         List<Book> resultListOf1Book = generateListOfNBooks(1);
         List<Book> resultListOf5Books = generateListOfNBooks(5);
-        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser))
-                .thenReturn(resultListOf1Book);
-        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser))
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser0))
                 .thenReturn(resultListOf0Books);
-        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser))
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser1))
+                .thenReturn(resultListOf1Book);
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser2))
                 .thenReturn(resultListOf5Books);
 
         // When
-        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(libraryUser);
-        List<Book> theListOfBooks1 = bookLibrary.listBooksInHandsOf(libraryUser);
-        List<Book> theListOfBooks5 = bookLibrary.listBooksInHandsOf(libraryUser);
+        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(libraryUser0);
+        List<Book> theListOfBooks1 = bookLibrary.listBooksInHandsOf(libraryUser1);
+        List<Book> theListOfBooks5 = bookLibrary.listBooksInHandsOf(libraryUser2);
         // Then
 
-        assertEquals(0, theListOfBooks0.size());
-        assertEquals(1, theListOfBooks1.size());
-        assertEquals(5, theListOfBooks5.size());
+        assertEquals(resultListOf0Books.size(), theListOfBooks0.size());
+        assertEquals(resultListOf1Book.size(), theListOfBooks1.size());
+        assertEquals(resultListOf5Books.size(), theListOfBooks5.size());
     }
 }
