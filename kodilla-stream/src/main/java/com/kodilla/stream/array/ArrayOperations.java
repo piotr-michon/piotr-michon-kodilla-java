@@ -9,6 +9,6 @@ public interface ArrayOperations {
 
         return IntStream.range(0, numbers.length)
                 .mapToDouble(n -> numbers[n])
-                .average().getAsDouble();
+                .average().orElse(Double.NaN);
     }
 }
