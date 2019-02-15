@@ -18,4 +18,22 @@ public final class Continent {
     public List<Country> getCountryList() {
         return countryList;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Continent continent = (Continent) o;
+
+        if (!continentName.equals(continent.continentName)) return false;
+        return countryList.equals(continent.countryList);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = continentName.hashCode();
+        result = 31 * result + countryList.hashCode();
+        return result;
+    }
 }
