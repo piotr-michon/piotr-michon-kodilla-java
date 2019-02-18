@@ -1,9 +1,12 @@
 package com.kodilla.stream.portfolio;
 
+import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +143,16 @@ public class BoardTestSuite {
     @Test
     public void testAddTaskListAverageWorkingOnTask() {
         //Given
+        Board project = prepareTestData();
         //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        double AvgNoOfDaysWorkingOnTask = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .mapToDouble(t -> ChronoUnit.DAYS.between(t.getCreated(), LocalDate.now()))
+                .average().orElse(Double.NaN);
         //Then
+        Assert.assertEquals(10, AvgNoOfDaysWorkingOnTask, 0);
     }
 }
