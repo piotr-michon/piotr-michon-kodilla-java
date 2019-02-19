@@ -147,12 +147,12 @@ public class BoardTestSuite {
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        double AvgNoOfDaysWorkingOnTask = project.getTaskLists().stream()
+        double avgNoOfDaysWorkingOnTask = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
                 .mapToDouble(t -> ChronoUnit.DAYS.between(t.getCreated(), LocalDate.now()))
                 .average().orElse(Double.NaN);
         //Then
-        Assert.assertEquals(10, AvgNoOfDaysWorkingOnTask, 0);
+        Assert.assertEquals(10, avgNoOfDaysWorkingOnTask, 0);
     }
 }
