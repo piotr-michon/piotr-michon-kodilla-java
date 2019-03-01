@@ -1,0 +1,24 @@
+Welcome to Rock - Paper - Scissors - Lizard - Spock game!
+
+This is an extended version of classic Rock - Paper - Scissors.
+You can find full list of rules below:
+1. Paper covers rock.
+2. Rock crushes scissors.
+3. Rock crushes lizard.
+4. Spock vaporizes rock.
+5. Scissors cut paper.
+6. Lizard eats paper.
+7. Paper disproves Spock.
+8. Scissors decapitate lizard.
+9. Spock smashes scissors.
+10. Lizard poisons Spock.
+11. Draw.
+
+Controls:
+1 - Choose rock
+2 - Choose paper
+3 - Choose scissors
+4 - Choose lizard
+5 - Choose Spock
+x - End game
+n - Start new game
