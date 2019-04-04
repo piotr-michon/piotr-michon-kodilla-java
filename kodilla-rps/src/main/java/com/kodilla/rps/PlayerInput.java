@@ -5,12 +5,21 @@ import java.util.Scanner;
 public class PlayerInput {
     private String name;
     private String move;
+    private boolean condition;
     private int numberOfRounds;
     Scanner scanner = new Scanner(System.in);
 
     public void setName() {
         System.out.println("\nPlease enter your name: ");
-        name = scanner.nextLine();
+        condition = false;
+        while (!condition) {
+            name = scanner.nextLine();
+            if (name.length() >= 3) {
+                condition = true;
+            } else {
+                System.out.println("You name needs to be at least 3 characters long! Please enter your name again: ");
+            }
+        }
     }
 
     public String getName() {
@@ -19,7 +28,7 @@ public class PlayerInput {
 
     public void setNumberOfRounds() {
         System.out.println("\nPlease enter number of rounds you would like to play: ");
-        boolean condition = false;
+        condition = false;
         while (!condition) {
             try {
                 numberOfRounds = scanner.nextInt();
@@ -41,7 +50,7 @@ public class PlayerInput {
 
     public String playerMove() {
         System.out.println("Please press 1 for rock, 2 for paper, 3 for scissors, 4 for lizard or 5 for Spock: ");
-        boolean condition = false;
+        condition = false;
         while (!condition) {
             try {
                 move = scanner.next().toUpperCase();
