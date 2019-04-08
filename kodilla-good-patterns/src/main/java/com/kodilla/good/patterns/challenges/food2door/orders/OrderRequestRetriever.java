@@ -5,7 +5,6 @@ import com.kodilla.good.patterns.challenges.food2door.manufacturers.ExtraFoodSho
 import com.kodilla.good.patterns.challenges.food2door.manufacturers.Manufacturer;
 import com.kodilla.good.patterns.challenges.food2door.products.Product;
 
-
 public class OrderRequestRetriever {
     public OrderRequest retrieve() {
         Manufacturer extraFoodShop = new ExtraFoodShop();
