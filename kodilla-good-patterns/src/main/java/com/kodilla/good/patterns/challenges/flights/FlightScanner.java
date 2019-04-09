@@ -4,19 +4,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FlightScanner {
-    public void lookForArrivalAirport(Set<Flight> flightSet, String airport) {
+    private FlightDatabase flightDatabase = new FlightDatabase();
+    private Set<Flight> flightSet = flightDatabase.getFlightSet();
+
+    public void lookForArrivalAirport(String airport) {
         flightSet.stream()
                 .filter(f -> f.getArrivalAirport().equals(airport))
                 .forEach(System.out::println);
     }
 
-    public void lookForDepartureAirport(Set<Flight> flightSet, String airport) {
+    public void lookForDepartureAirport(String airport) {
         flightSet.stream()
                 .filter(f -> f.getDepartureAirport().equals(airport))
                 .forEach(System.out::println);
     }
 
-    public void lookForConnectingAirport(Set<Flight> flightSet, String airport1, String airport2) {
+    public void lookForConnectingAirport(String airport1, String airport2) {
         Set<Flight> flightSet1 = flightSet.stream()
                 .filter(f -> f.getArrivalAirport().equals(airport1))
                 .collect(Collectors.toSet());
