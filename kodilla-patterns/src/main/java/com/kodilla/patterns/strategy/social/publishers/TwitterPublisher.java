@@ -3,6 +3,6 @@ package com.kodilla.patterns.strategy.social.publishers;
 public class TwitterPublisher implements SocialPublisher {
     @Override
     public String share() {
-        return "Dummy Twitter post";
+        return "Dummy Twitter sharePost";
     }
 }

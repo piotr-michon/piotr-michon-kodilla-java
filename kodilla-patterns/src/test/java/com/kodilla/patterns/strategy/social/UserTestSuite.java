@@ -13,14 +13,14 @@ public class UserTestSuite {
         User user3 = new Millenials("Jake Doe");
 
         //When
-        System.out.println("John just posted: " + user1.post());
-        System.out.println("Jane just posted: " + user2.post());
-        System.out.println("Jake just posted: " + user3.post());
+        System.out.println("John just posted: " + user1.sharePost());
+        System.out.println("Jane just posted: " + user2.sharePost());
+        System.out.println("Jake just posted: " + user3.sharePost());
 
         //Then
-        Assert.assertEquals("Dummy Snapchat post", user1.post());
-        Assert.assertEquals("Dummy Facebook post", user2.post());
-        Assert.assertEquals("Dummy Twitter post", user3.post());
+        Assert.assertEquals("Dummy Snapchat sharePost", user1.sharePost());
+        Assert.assertEquals("Dummy Facebook sharePost", user2.sharePost());
+        Assert.assertEquals("Dummy Twitter sharePost", user3.sharePost());
     }
 
     @Test
@@ -29,11 +29,11 @@ public class UserTestSuite {
         User user = new YGeneration("Robert Smith");
 
         //When
-        System.out.println("Robert just posted: " + user.post());
-        user.setPostingPreferences(new FacebookPublisher());
-        System.out.println("Robert just posted: " + user.post());
+        System.out.println("Robert just posted: " + user.sharePost());
+        user.setSharingPreferences(new FacebookPublisher());
+        System.out.println("Robert just posted: " + user.sharePost());
 
         //Then
-        Assert.assertEquals("Dummy Facebook post", user.post());
+        Assert.assertEquals("Dummy Facebook sharePost", user.sharePost());
     }
 }
