@@ -35,6 +35,10 @@ public class InvoiceDaoTestSuite {
         Item item2 = new Item(product2, new BigDecimal(4), 5, new BigDecimal(6));
         Item item3 = new Item(product3, new BigDecimal(7), 8, new BigDecimal(9));
 
+        product1.getItems().add(item1);
+        product2.getItems().add(item2);
+        product3.getItems().add(item3);
+
         item1.setInvoice(invoice);
         item2.setInvoice(invoice);
         item3.setInvoice(invoice);
@@ -44,7 +48,13 @@ public class InvoiceDaoTestSuite {
         invoice.getItems().add(item3);
 
         //When
+        productDao.save(product1);
+        productDao.save(product2);
+        productDao.save(product3);
         invoiceDao.save(invoice);
+        itemDao.save(item1);
+        itemDao.save(item2);
+        itemDao.save(item3);
         int id = invoice.getId();
 
         //Then
