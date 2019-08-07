@@ -9,7 +9,6 @@ public class MyTaxiNetworkOrderDecorator extends AbstractTaxiOrderDecorator {
 
     @Override
     public BigDecimal getCost() {
-        //hard coded stub cost = 30
         return super.getCost().add(new BigDecimal(30));
     }
 
